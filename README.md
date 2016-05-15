@@ -2,19 +2,18 @@
 ag-Grid
 ==============
 
-"ag" stands for AGnostic
+A powerfull grid for plan javascript or Angular.js, licensed in MIT.
+The author - ceolter - has since moved the project into enterprise vs free version. This clone provides  the latest freeware version.
 
 #### Install with Bower
 ```sh
-$ bower install ag-grid
+$ bower install https://github.com/mantasurbonas/ag-grid.git
 ```
 
 #### Install with Npm
 ```sh
-$ npm install ag-grid
+$ npm install https://github.com/mantasurbonas/ag-grid
 ```
-
-See the [www.ag-grid.com](http://www.ag-grid.com) for overview and documentation.
 
 
 Building
@@ -54,16 +53,10 @@ separately.
 Asking Questions
 ==============
 
-Please do not use GitHub issues to ask questions. Ask questions on the
-[website forum](http://www.ag-grid.com/forum).
+Please  use GitHub issues to ask questions. 
 
 
 Contributing
 ==============
 
-ag-Grid is not looking for contributors. It is not intended to be developed
-by an online community.
-
-PR's on new features **are not** generally accepted. 
-
-PR's on small bug fixes **are** generally accepted.
+All pull requests are welcome. Must be MIT licensed.
