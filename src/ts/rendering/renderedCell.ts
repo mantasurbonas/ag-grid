@@ -343,6 +343,7 @@ export default class RenderedCell {
     private addCellDoubleClickedHandler() {
         var that = this;
         var colDef = this.column.getColDef();
+        var ret = false;
         this.vGridCell.addEventListener('dblclick', function (event: any) {
             // always dispatch event to eventService
             var agEvent: any = that.createEvent(event, this);
@@ -350,8 +351,11 @@ export default class RenderedCell {
 
             // check if colDef also wants to handle event
             if (typeof colDef.onCellDoubleClicked === 'function') {
-                colDef.onCellDoubleClicked(agEvent);
+                ret = colDef.onCellDoubleClicked(agEvent);
             }
+		
+            if (ret === true)
+		return;
 
             if (!that.gridOptionsWrapper.isSingleClickEdit() && that.isCellEditable()) {
                 that.startEditing();
