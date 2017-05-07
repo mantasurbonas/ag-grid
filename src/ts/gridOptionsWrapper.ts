@@ -209,7 +209,7 @@ export default class GridOptionsWrapper {
     public globalEventHandler(eventName: string, event?: any): void {
         var callbackMethodName = ComponentUtil.getCallbackForEvent(eventName);
         if (typeof (<any>this.gridOptions)[callbackMethodName] === 'function') {
-            (<any>this.gridOptions)[callbackMethodName](event);
+            return (<any>this.gridOptions)[callbackMethodName](event);
         }
     }
 

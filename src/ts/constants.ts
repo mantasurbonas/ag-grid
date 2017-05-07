@@ -16,4 +16,5 @@ export default class Constants {
     static KEY_UP = 38;
     static KEY_LEFT = 37;
     static KEY_RIGHT = 39;
+    static KEY_F2 = 113;
 }

@@ -347,7 +347,7 @@ export default class RenderedCell {
         this.vGridCell.addEventListener('dblclick', function (event: any) {
             // always dispatch event to eventService
             var agEvent: any = that.createEvent(event, this);
-            that.eventService.dispatchEvent(Events.EVENT_CELL_DOUBLE_CLICKED, agEvent);
+            ret = that.eventService.dispatchEvent(Events.EVENT_CELL_DOUBLE_CLICKED, agEvent);
 
             // check if colDef also wants to handle event
             if (typeof colDef.onCellDoubleClicked === 'function') {
@@ -545,11 +545,18 @@ export default class RenderedCell {
             var key = event.which || event.keyCode;
 
             var startNavigation = key === Constants.KEY_DOWN || key === Constants.KEY_UP
-                || key === Constants.KEY_LEFT || key === Constants.KEY_RIGHT;
+                               || key === Constants.KEY_LEFT || key === Constants.KEY_RIGHT 
+                               || key === Constants.KEY_TAB;
+
             if (startNavigation) {
                 event.preventDefault();
+
+                if (key === Constants.KEY_TAB)
+                    key = event.shiftKey ? Constants.KEY_LEFT : Constants.KEY_RIGHT;
+
                 that.rowRenderer.navigateToNextCell(key, that.rowIndex, that.column);
-                return;
+
+                return false;
             }
 
             var startEdit = that.isKeycodeForStartEditing(key);
@@ -576,7 +583,7 @@ export default class RenderedCell {
     }
 
     private isKeycodeForStartEditing(key: number): boolean {
-        return key === Constants.KEY_ENTER || key === Constants.KEY_BACKSPACE || key === Constants.KEY_DELETE;
+        return key === Constants.KEY_ENTER || key === Constants.KEY_F2 || key === Constants.KEY_BACKSPACE || key === Constants.KEY_DELETE;
     }
 
     public createSelectionCheckbox() {
@@ -699,7 +706,8 @@ export default class RenderedCell {
             context: this.gridOptionsWrapper.getContext(),
             refreshCell: this.refreshCell.bind(this),
             eGridCell: this.vGridCell,
-            eParentOfValue: this.vParentOfValue
+            eParentOfValue: this.vParentOfValue,
+            renderedCell: this
         };
         // start duplicated code
         var actualCellRenderer: Function;

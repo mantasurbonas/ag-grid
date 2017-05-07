@@ -14,6 +14,8 @@ export default class VHtmlElement extends VElement {
 
     private bound: boolean;
     private element: HTMLElement;
+    
+    public customRenderer: any;
 
     constructor(type: string) {
         super();

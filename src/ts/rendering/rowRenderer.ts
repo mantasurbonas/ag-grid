@@ -658,6 +658,16 @@ export default class RowRenderer {
                 nextRenderedCell.startEditing();
                 nextRenderedCell.focusCell(false);
                 return;
+            } else{ 
+                var colDef = nextRenderedCell.getColumn().getColDef();
+                if (typeof colDef.cellRenderer === 'function') {
+                    nextRenderedCell.focusCell(true);
+                    var renderer = nextRenderedCell.getVGridCell().customRenderer;
+                    if (renderer && renderer.editFunc){
+                        renderer.editFunc();
+                        return;
+                    }
+                }
             }
         }
     }

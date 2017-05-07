@@ -241,7 +241,7 @@ export default class SetFilterModel {
         }
         var selectedValues = <any>[];
         _.iterateObject(this.selectedValuesMap, function (key: any) {
-            selectedValues.push(key);
+            selectedValues.push(key==="null"?null:key);
         });
         return selectedValues;
     }

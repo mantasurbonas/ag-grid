@@ -46,18 +46,21 @@ export default class EventService {
 
     // why do we pass the type here? the type is in ColumnChangeEvent, so unless the
     // type is not in other types of events???
-    public dispatchEvent(eventType: string, event?: any): void {
+    public dispatchEvent(eventType: string, event?: any): any {
         if (!event) {
             event = {};
         }
+	var ret: any;
         //this.logger.log('dispatching: ' + event);
         var listenerList = this.getListenerList(eventType);
         listenerList.forEach( (listener)=> {
-            listener(event);
+            ret = listener(event);
         });
 
         this.globalListeners.forEach( (listener)=> {
-            listener(eventType, event);
+            ret = listener(eventType, event);
         });
+
+	return ret;
     }
 }
